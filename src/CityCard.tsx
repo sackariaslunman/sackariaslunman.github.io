@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Card that holds a city and the warmer or lower buttons
 const Card = styled.div`
-    margin: 2em;
+    margin: 1em;
     padding: 2em;
     border: 5px solid white;
     border-radius: 1em;
@@ -40,7 +40,7 @@ const Card = styled.div`
 
     @media only screen and (max-width: 1000px) {
         padding: 1em;
-        margin: 1em;
+        margin: 0.5em;
         h1, h2 {
             font-size: 1em;
         }
