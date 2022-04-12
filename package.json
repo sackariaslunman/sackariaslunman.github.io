@@ -1,0 +1,36 @@
+{
+  "homepage": "http://sackariaslunman.github.io/",
+  "name": "package.json",
+  "version": "0.0.0",
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "py create_cname.py sackarias.se & gh-pages -d dist",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.1.18",
+    "@lottiefiles/react-lottie-player": "^3.4.1",
+    "@types/axios": "^0.14.0",
+    "@types/styled-components": "^5.1.20",
+    "axios": "^0.26.1",
+    "concurrently": "^7.0.0",
+    "framer-motion": "^5.6.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-simple-typewriter": "^3.0.1",
+    "styled-components": "^5.3.3",
+    "typewriter-effect": "^2.18.2"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.33",
+    "@types/react-dom": "^17.0.10",
+    "@vitejs/plugin-react": "^1.0.7",
+    "gh-pages": "^3.2.3",
+    "typescript": "^4.4.4",
+    "vite": "^2.7.2"
+  }
+}
