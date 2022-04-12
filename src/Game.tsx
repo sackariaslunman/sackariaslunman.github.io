@@ -12,7 +12,8 @@ const GameWrapper = styled.div`
     & > h1 {
         text-align: center;
         color: white;
-        padding: 0 0.5em;
+        padding: 0 1em;
+        font-size: 2em;
     }
 
     & > button {
@@ -26,6 +27,15 @@ const GameWrapper = styled.div`
             color: yellow;
             border: 5px solid yellow;
             transition: all 0.1s;
+        }
+    }
+
+    @media only screen and (max-width: 1000px) {
+        & > h1 {
+            font-size: 1em;
+        }
+        & > button {
+            font-size: 1em;
         }
     }
 `;

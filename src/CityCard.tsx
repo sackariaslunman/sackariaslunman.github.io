@@ -15,14 +15,7 @@ const Card = styled.div`
     h1, h2 {
         text-align: center;
         color: white;
-        padding: 0 0.5em;
-    }
-
-    h1 {
-        font-size: 2em;
-    }
-
-    h2 {
+        padding: 0 1em;
         font-size: 2em;
     }
 
@@ -42,6 +35,17 @@ const Card = styled.div`
             border: 5px solid yellow;
             color: yellow;
             transition: all 0.1s;
+        }
+    }
+
+    @media only screen and (max-width: 1000px) {
+        padding: 2em;
+        margin: 1em;
+        h1, h2 {
+            font-size: 1em;
+        }
+        button {
+            font-size: 0.75em;
         }
     }
 `;

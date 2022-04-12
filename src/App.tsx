@@ -9,6 +9,7 @@ library.add(faSnowflake, faFire, faSun, faWind, faSnowman, faXmark);
 const Main = styled.div`
   background-color: black;
   height: 100vh;
+  padding: 1em;
 `;
 
 // Wrapper for the title at the top of the page
@@ -20,7 +21,7 @@ const Title = styled.div`
 
   h1 {
     font-size: 4em;
-    padding: 0 0.5em;
+    padding: 0 1em;
     color: white;
     .warm {
       color: #DA9A1B;
@@ -32,8 +33,17 @@ const Title = styled.div`
 
   h3 {
     font-size: 1em;
-    padding: 0 0.5em;
+    padding: 0 1em;
     color: white;
+  }
+
+  @media only screen and (max-width: 1000px) {
+    h1 {
+        font-size: 2em;
+    }
+    h3 {
+        font-size: 0.5em;
+    }
   }
 `;
 
