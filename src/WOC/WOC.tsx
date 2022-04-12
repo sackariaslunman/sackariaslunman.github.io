@@ -2,7 +2,8 @@ import ListOfCapitals from "./ListOfCapitals";
 import axios from "axios";
 
 // The key to the openweather api
-// TODO: hide key in secret file. It's okay right now since it's a free plan and the website is in testing mode
+// TODO: hide key in secret file. 
+// It's okay for now since it's a free plan and the website is in testing mode, and it's easy to just get another api key
 const WeatherApiKey = "afae56ddf369a915fea030672b89f6fd";
 
 // Functions that generates the hexcode for a random color
