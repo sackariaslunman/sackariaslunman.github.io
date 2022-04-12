@@ -40,12 +40,23 @@ const GameWrapper = styled.div`
     }
 `;
 
-
 // Wrapper around the two city cards
 const CardWrapper = styled.div`
     display: grid;
     place-content: center;
     grid-template-columns: 1fr 1fr;
+`;
+
+const ErrorMessage = styled.div`
+    background: red;
+    border: 5px solid white;
+    border-radius: 1em;
+    padding: 1em;
+    h1 {
+        font-size: 1em;
+        text-align: center;
+        color: white;
+    }
 `;
 
 // Logic of the game
@@ -58,7 +69,8 @@ interface GameData {
     nextCity: City | null,
     hasLost: boolean,
     hidden: boolean,
-    hasInitialized: boolean
+    hasInitialized: boolean,
+    error: string | null
 }
 
 // Component that encapsulates the entire game
@@ -70,19 +82,27 @@ const Game = () => {
         nextCity: null,
         hasLost: false,
         hidden: true,
-        hasInitialized: false
+        hasInitialized: false,
+        error: null
     });
 
     // Resets the cities, score and other data of the game
     const reset = async () => {
-        setGameData({
-            score: 0,
-            currentCity: await woc.getRandomCity(),
-            nextCity: await woc.getRandomCity(),
-            hasLost: false,
-            hidden: true,
-            hasInitialized: true
-        });
+        // Getting random cities, which connects to OpenWeather which could cause an error
+        try {
+            setGameData({
+                score: 0,
+                currentCity: await woc.getRandomCity(),
+                nextCity: await woc.getRandomCity(),
+                hasLost: false,
+                hidden: true,
+                hasInitialized: true,
+                error: null
+            });
+        // If there's a 401 or 429 error, give a generic error message
+        } catch(error) {
+            setGameData({ ...gameData, error: "Ooops! The server had trouble connecting to the OpenWeather API. Try again later!" });
+        }
     };
 
     // After starting the game for the first time, resets and initiazes the game state
@@ -114,7 +134,17 @@ const Game = () => {
             if (guessCorrect) {
                 nextGameData.score += 1;
                 nextGameData.currentCity = nextGameData.nextCity;
-                nextGameData.nextCity = await woc.getRandomCity();
+
+                // Try to get a random city, which connects to OpenWeather which could cause an error
+                try {
+                    // If it succeeds, add the next city
+                    nextGameData.nextCity = await woc.getRandomCity();
+                }
+                // If there's an 401 or 429 error
+                catch (error) {
+                    // Set an error with a generic message
+                    setGameData({ ...gameData, error: "Ooops! The server had trouble connecting to the OpenWeather API. Try again later!" });
+                }
                 nextGameData.hidden = true;
             }
             // Else, game over
@@ -128,26 +158,35 @@ const Game = () => {
     
     return (
         <GameWrapper>
-            <h1>
-                Score: { gameData.score }
-            </h1>
-            <CardWrapper>
-                <CityCard 
-                    onClick={ () => {} }
-                    city={ gameData?.currentCity } 
-                    hidden={false} 
-                />
-                <CityCard
-                    onClick={guess}
-                    city={ gameData?.nextCity } 
-                    hidden={gameData.hidden} 
-                />
-            </CardWrapper>
-            { gameData.hasLost && (
-                <button onClick={ reset }>
-                    Try again?
-                </button>
-            )}
+            { gameData.error ?
+            <>
+                <ErrorMessage>
+                    <h1>{ gameData.error }</h1>
+                </ErrorMessage>
+            </> : 
+            <>
+                <h1>
+                    Score: { gameData.score }
+                </h1>
+                <CardWrapper>
+                    <CityCard 
+                        onClick={ () => {} }
+                        city={ gameData?.currentCity } 
+                        hidden={false} 
+                    />
+                    <CityCard
+                        onClick={guess}
+                        city={ gameData?.nextCity } 
+                        hidden={gameData.hidden} 
+                    />
+                </CardWrapper>
+                { gameData.hasLost && (
+                    <button onClick={ reset }>
+                        Try again?
+                    </button>
+                )}
+            </>
+            }
         </GameWrapper>
     )
 };
