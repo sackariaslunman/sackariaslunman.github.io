@@ -1,5 +1,6 @@
 // concap.csv is a csv file of all capital cities
 // ListOfCapitals.tsx is the concap.csv converted to JSON
+// The dataset can be found at https://www.kaggle.com/datasets/nikitagrec/world-capitals-gps/metadata
 export default [
     {
       "CountryName": "Somaliland",
