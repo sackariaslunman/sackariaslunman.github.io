@@ -99,7 +99,7 @@ const Game = () => {
             return
 
         // Else, check if the guess was correct
-        const guessCorrect = (gameData.nextCity?.temperature >= gameData.currentCity?.temperature) == higher;
+        const guessCorrect = (gameData.nextCity?.temperature >= gameData.currentCity?.temperature) == higher || (gameData.nextCity?.temperature == gameData.currentCity?.temperature);
 
         // Unhide the right city's temperature
         setGameData({ ...gameData, hidden: false });
