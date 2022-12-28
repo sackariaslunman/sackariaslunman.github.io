@@ -52,7 +52,7 @@ const App = () => {
   return (
     <Main>
       <Title>
-        <h1><span className="warm"> Warmer</span> or <span className="cold">Colder</span>?</h1>
+        <h1><span className="warm"> Poop</span> or <span className="cold">Colder</span>?</h1>
         <h3>(right now...?)</h3>
       </Title>
       <Game />
